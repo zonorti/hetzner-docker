@@ -7,9 +7,16 @@ require "hetzner-docker"
 
 opts = Slop.parse(help: true) do
   description 'Usage: manage.rb [command] [options]'
-  on 'i','ip=', 'Server ip'
+  on :i, :ip=, 'Server ip'
   on 'v','version', 'module version' do
-    puts 1010
+    puts HetznerDocker::VERSION
+  end
+  on 'info', 'called info' do
+    puts to_hash
+  end
+
+  on 'm','methods', 'print all methods' do
+    puts HetznerDocker.public_instance_methods
   end
 
 
@@ -19,25 +26,32 @@ opts = Slop.parse(help: true) do
       puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
     end
   end
+
   command 'ubuntu' do
     description 'Install ubuntu on server'
+    on :i, :ip=, 'Server ip'
     run do |opts, args|
-      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+      puts "ubuntu installed at #{opts[:ip]}"
+      host = HetznerHost.new(opts)
+      host.install_ubuntu
     end
   end
+
   command 'install' do
     description 'Install chef'
     run do |opts, args|
       puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
     end
   end
+
   command 'cook' do
-    description 'Cook'
+    description 'Cook docker recipes'
     on 'b', 'cookbook', 'Cook this recipe only', argument: :optional
     run do |opts, args|
       puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
     end
   end
+
   command 'bootstrap' do
     description 'Do everything'
     run do |opts, args|

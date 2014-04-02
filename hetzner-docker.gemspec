@@ -5,7 +5,7 @@ require 'hetzner-docker/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "hetzner-docker"
-  spec.version       = Hetzner::Docker::VERSION
+  spec.version       = HetznerDocker::VERSION
   spec.authors       = ["Sergey Melnik"]
   spec.email         = ["smelnik@onetwotrip.com"]
   spec.summary       = %q{Configures and installs docker to Hetzner server}
