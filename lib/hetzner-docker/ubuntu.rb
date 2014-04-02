@@ -11,5 +11,7 @@ class HetznerHost
       ssh.exec "/root/do-install-trusty.sh #{@hostname}"
     end
     clear_known_key
+    wait_for_reboot
+    puts "Fresh ubuntu installed at #{@ip}"
   end
 end

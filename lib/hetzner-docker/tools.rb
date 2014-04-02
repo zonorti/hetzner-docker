@@ -3,8 +3,7 @@ require 'net/scp'
 
 class HetznerHost
   def put_key
-  	clear_known_key
-    puts "Waiting for #{@ip}..." until test_ssh
+    clear_known_key
     identity_file = File.expand_path(DEFAULT_IDENTITY_FILE)
     Net::SSH.start(@ip, @user, :password => @password) do |ssh|
       ssh.exec "test -d ~/.ssh || mkdir ~/.ssh"
@@ -17,6 +16,13 @@ class HetznerHost
 
   def clear_known_key
     system("ssh-keygen -q -R #{@ip} >/dev/null")
+  end
+
+  def wait_for_reboot
+    while test_ssh
+      sleep 1
+    end
+    puts "Waiting for #{@ip}..." until test_ssh
   end
 
   def test_ssh(port = 22)
