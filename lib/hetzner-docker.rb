@@ -2,6 +2,7 @@ require "hetzner-docker/version"
 require "hetzner-docker/rescuemode"
 require "hetzner-docker/ubuntu"
 require "hetzner-docker/chefbootstrap"
+require "hetzner-docker/chefrun"
 require "hetzner-docker/tools"
 
 class HetznerHost
@@ -14,8 +15,8 @@ class HetznerHost
     unless defined?(@user)
       @user='root'
     end
-    unless defined?(@hostname)
-      @hostname="docker#{SecureRandom.hex(3)}"
+    unless defined?(@hostname) and @hostname != nil
+      @hostname="docker#{SecureRandom.hex(3)+@ip.rpartition(".")[2]}"
     end
   end
   def user
