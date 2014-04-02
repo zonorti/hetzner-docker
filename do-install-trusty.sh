@@ -4,7 +4,7 @@ export LANG="C"
 export DEBIAN_FRONTEND=noninteractive
 
 TARGET_HOSTNAME=$1
-TARGET_DOMAIN="twiket.com"
+TARGET_DOMAIN=$2
 RELEASE="trusty"
 
 REPO="http://de.archive.ubuntu.com/ubuntu/"

@@ -8,7 +8,7 @@ class HetznerHost
     Net::SSH.start(@ip, @user) do |ssh|
       ssh.scp.upload! File.expand_path(Dir.pwd+"/do-install-trusty.sh"), "/root/do-install-trusty.sh"
       puts "bash installer copied to #{@hostname}"
-      ssh.exec "/root/do-install-trusty.sh #{@hostname}"
+      ssh.exec "/root/do-install-trusty.sh #{@hostname} #{@domain}"
     end
     clear_known_key
     wait_for_reboot
