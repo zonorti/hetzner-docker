@@ -7,6 +7,7 @@ TARGET_HOSTNAME=$1
 TARGET_DOMAIN="twiket.com"
 RELEASE="trusty"
 
+REPO="http://de.archive.ubuntu.com/ubuntu/"
 DEBOOTSTRAP_VERSION="1.0.59"
 TARGET_IPADDR=$(/sbin/ip addr show dev eth0 | awk '/inet /  { print $2 }' | cut -d/ -f 1)
 TARGET_NETMASK=$(ifconfig "eth0" | grep 'Mask:' | cut -d: -f4 | awk '{ print $1}')
@@ -73,12 +74,12 @@ mount -v -t ext4 /dev/md0 /newroot/boot
 
 # download and install debootstrap
 action "installing debootstrap"
-wget http://archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_${DEBOOTSTRAP_VERSION}_all.deb
+wget ${REPO}pool/main/d/debootstrap/debootstrap_${DEBOOTSTRAP_VERSION}_all.deb
 dpkg -i debootstrap_${DEBOOTSTRAP_VERSION}_all.deb
 rm debootstrap_*.deb
 
 action "running debootstrap"
-debootstrap --arch=amd64 --components=main,restricted,universe,multiverse --verbose $RELEASE /newroot http://de.archive.ubuntu.com/ubuntu/
+debootstrap --arch=amd64 --components=main,restricted,universe,multiverse --verbose $RELEASE /newroot $REPO
 
 action "writing fstab"
 cat >/newroot/etc/fstab <<EOF
@@ -95,7 +96,7 @@ chroot /newroot /bin/bash -c "grep -v swap /etc/fstab >/etc/mtab"
 
 action "mounting filesystems - stage 2"
 mount -v --rbind /dev /newroot/dev
-#mount -v --rbind /dev/pts /newroot/dev/pts
+mount -v --rbind /dev/pts /newroot/dev/pts
 mount -v --rbind /proc /newroot/proc
 mount -v --rbind /sys /newroot/sys
 chroot /newroot locale-gen en_US.UTF-8
@@ -148,18 +149,18 @@ action "setting up apt"
 # install missing packages
 cp -f /newroot/etc/apt/sources.list /newroot/etc/apt/sources.list.orig
 cat >/newroot/etc/apt/sources.list <<EOF
-deb http://de.archive.ubuntu.com/ubuntu/ $RELEASE main restricted universe multiverse 
+deb $REPO $RELEASE main restricted universe multiverse 
 EOF
 
 action "update package index and install missing packages"
 chroot /newroot dpkg --configure -a
-chroot /newroot apt-get -y update
-chroot /newroot apt-get -y install openssh-server lvm2 mdadm initramfs-tools nano htop apparmor
+chroot /newroot apt-get -yq update
+chroot /newroot apt-get -yq install openssh-server lvm2 mdadm initramfs-tools nano htop apparmor
 chroot /newroot /bin/bash -c "/usr/share/mdadm/mkconf >/etc/mdadm/mdadm.conf"
 
 action "install kernel and bootloader"
-chroot /newroot apt-get -y install linux-server
-chroot /newroot apt-get -y install grub-pc
+chroot /newroot apt-get -yq install linux-server
+chroot /newroot apt-get -yq install grub-pc
 chroot /newroot /bin/bash -c "update-initramfs -k all -u"
 chroot /newroot /bin/bash -c "grub-install --no-floppy --recheck /dev/sda"
 chroot /newroot /bin/bash -c "grub-install --no-floppy --recheck /dev/sdb"

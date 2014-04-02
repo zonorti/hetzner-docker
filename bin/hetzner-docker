@@ -1,18 +1,13 @@
 #!/usr/bin/env ruby
 
-$: << "File.expand_path(File.dirname(__FILE__), 'lib')"
 
 require "slop"
 require "hetzner-docker"
-
+DEFAULT_IDENTITY_FILE = '~/.ssh/id_rsa.pub'
 opts = Slop.parse(help: true) do
   description 'Usage: manage.rb [command] [options]'
-  on :i, :ip=, 'Server ip'
   on 'v','version', 'module version' do
     puts HetznerDocker::VERSION
-  end
-  on 'info', 'called info' do
-    puts to_hash
   end
 
   on 'm','methods', 'print all methods' do
@@ -22,32 +17,38 @@ opts = Slop.parse(help: true) do
 
   command 'rescue' do
     description 'Enter Rescue mode'
+    on :i, :ip=, 'Server ip'
     run do |opts, args|
-      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+      host = HetznerHost.new(opts.to_hash)
+      host.rescuemode
     end
+
   end
 
   command 'ubuntu' do
     description 'Install ubuntu on server'
     on :i, :ip=, 'Server ip'
+    on :H, :hostname=, 'Desired server hostname', argument: :optional
     run do |opts, args|
       host = HetznerHost.new(opts.to_hash)
-      if host.test_ssh
-        puts "server online"
-      end
+      host.rescuemode
+      host.install_ubuntu
     end
   end
 
   command 'install' do
+    on :i, :ip=, 'Server ip'
     description 'Install chef'
     run do |opts, args|
-      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+      host = HetznerHost.new(opts.to_hash)
+      puts host.hostname
     end
   end
 
   command 'cook' do
     description 'Cook docker recipes'
-    on 'b', 'cookbook', 'Cook this recipe only', argument: :optional
+    on :i, :ip=, 'Server ip'
+    on :b, :cookbook= , 'Cook this recipe only', argument: :optional
     run do |opts, args|
       puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
     end

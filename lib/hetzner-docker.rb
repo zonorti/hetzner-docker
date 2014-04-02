@@ -11,5 +11,18 @@ class HetznerHost
     init.each_pair do |key, val|
       instance_variable_set('@' + key.to_s, val)
     end
+    unless defined?(@user)
+      @user='root'
+    end
+    unless defined?(@hostname)
+      @hostname="docker#{SecureRandom.hex(3)}"
+    end
   end
+  def user
+    @user
+  end
+  def hostname
+    @hostname
+  end
+
 end
