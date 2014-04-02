@@ -24,6 +24,7 @@ export HETZNER_USER="" && export HETZNER_PASSWORD=""
 hetzner-docker bootstrap -i <server-ip> -d <server-domain>
 ```
 
+
 ## TODO
 
 1. Modular config for do-install-trusty.sh
