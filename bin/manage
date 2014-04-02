@@ -1,1 +1,47 @@
-manage.rb
+#!/usr/bin/env ruby
+
+$: << "File.expand_path(File.dirname(__FILE__), 'lib')"
+
+require "slop"
+require "hetzner-docker"
+
+opts = Slop.parse(help: true) do
+  description 'Usage: manage.rb [command] [options]'
+  on 'i','ip=', 'Server ip'
+  on 'v','version', 'module version' do
+    puts 1010
+  end
+
+
+  command 'rescue' do
+    description 'Enter Rescue mode'
+    run do |opts, args|
+      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+    end
+  end
+  command 'ubuntu' do
+    description 'Install ubuntu on server'
+    run do |opts, args|
+      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+    end
+  end
+  command 'install' do
+    description 'Install chef'
+    run do |opts, args|
+      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+    end
+  end
+  command 'cook' do
+    description 'Cook'
+    on 'b', 'cookbook', 'Cook this recipe only', argument: :optional
+    run do |opts, args|
+      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+    end
+  end
+  command 'bootstrap' do
+    description 'Do everything'
+    run do |opts, args|
+      puts "You ran 'add' with options #{opts.to_hash} and args: #{args.inspect}"
+    end
+  end
+end
