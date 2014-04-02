@@ -18,11 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+export HETZNER_USER="" && export HETZNER_PASSWORD="" 
+
+hetzner-docker bootstrap -i <server-ip> -d <server-domain>
+```
+
+## TODO
+
+1. Modular config for do-install-trusty.sh
+2. More options
+3. Verbose and non-verbose output
+
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/hetzner-docker/fork )
+1. Fork it ( http://github.com/imelnik/hetzner-docker/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

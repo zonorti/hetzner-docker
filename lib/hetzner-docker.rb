@@ -18,6 +18,10 @@ class HetznerHost
     unless defined?(@hostname) and @hostname != nil
       @hostname="docker#{SecureRandom.hex(3)+@ip.rpartition(".")[2]}"
     end
+    unless defined?(@domain) and @domain != nil
+      @domain="twiket.com" # this is our default, sorry
+    end
+
   end
   def user
     @user
