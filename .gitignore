@@ -1,0 +1,4 @@
+*.lock
+nodes/
+.bundle/
+.env.source
