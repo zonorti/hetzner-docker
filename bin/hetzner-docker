@@ -73,3 +73,7 @@ opts = Slop.parse(help: true) do
     end
   end
 end
+
+if ARGV.empty?
+   puts opts.help
+end 
