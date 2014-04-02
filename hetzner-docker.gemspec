@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Hetzner::Docker::VERSION
   spec.authors       = ["Sergey Melnik"]
   spec.email         = ["smelnik@onetwotrip.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Configures and installs docker to Hetzner server}
+  spec.description   = %q{Configures and installs docker to Hetzner server}
   spec.homepage      = ""
   spec.license       = "MIT"
 
