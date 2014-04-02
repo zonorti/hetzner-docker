@@ -31,9 +31,10 @@ opts = Slop.parse(help: true) do
     description 'Install ubuntu on server'
     on :i, :ip=, 'Server ip'
     run do |opts, args|
-      puts "ubuntu installed at #{opts[:ip]}"
-      host = HetznerHost.new(opts)
-      host.install_ubuntu
+      host = HetznerHost.new(opts.to_hash)
+      if host.test_ssh
+        puts "server online"
+      end
     end
   end
 
