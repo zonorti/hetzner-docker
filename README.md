@@ -1,6 +1,10 @@
 # Hetzner::Docker
 
-Ultra simple deployment of Docker-enabled Hetzner servers  
+Ultra simple deployment of Docker-enabled Hetzner servers.
+Uses:
+hetzner-api
+Chef (knife-solo)
+chef-docker cookbook  
 
 
 ## Installation

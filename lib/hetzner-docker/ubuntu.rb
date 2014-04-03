@@ -6,9 +6,7 @@ class HetznerHost
   def install_ubuntu
     puts "Goint to install ubuntu at #{@ip}"
     Net::SSH.start(@ip, @user) do |ssh|
-      ssh.exec "wget #{@url} -O /root/do-install-trusty.sh"
-      puts "bash installer copied to #{@hostname}"
-      ssh.exec "/root/do-install-trusty.sh #{@hostname} #{@domain}"
+      ssh.exec "wget #{@url} -O /root/do-install-trusty.sh && /bin/bash /root/do-install-trusty.sh #{@hostname} #{@domain}"
     end
     clear_known_key
     wait_for_reboot
