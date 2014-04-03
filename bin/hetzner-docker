@@ -10,11 +10,6 @@ opts = Slop.parse(help: true) do
     puts HetznerDocker::VERSION
   end
 
-  on 'm','methods', 'print all methods' do
-    puts HetznerDocker.public_instance_methods
-  end
-
-
   command 'rescue' do
     description 'Enter Rescue mode'
     on :i, :ip=, 'Server ip'
