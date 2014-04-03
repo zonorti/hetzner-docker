@@ -22,6 +22,7 @@ Or install it yourself as:
     $ gem install hetzner-docker
 
 ## Usage
+You should have your ssh public key located at ~/.ssh/id_rsa.pub and get a copy of Berksfile at your current working directory.
 
 ```
 export HETZNER_USER="" && export HETZNER_PASSWORD="" 
@@ -36,6 +37,7 @@ hetzner-docker bootstrap -i <server-ip> -d <server-domain>
 1. Modular config for do-install-trusty.sh
 2. More options
 3. Verbose and non-verbose output
+4. Enable OpenVSwitch install
 
 
 ## Contributing

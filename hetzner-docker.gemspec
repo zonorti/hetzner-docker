@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["smelnik@onetwotrip.com"]
   spec.summary       = %q{Configures and installs docker to Hetzner server}
   spec.description   = %q{Configures and installs docker to Hetzner server}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/iMelnik/hetzner-docker"
   spec.license       = "GPLv2"
 
   spec.files         = `git ls-files -z`.split("\x0")
