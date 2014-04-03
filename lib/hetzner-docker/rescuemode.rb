@@ -20,9 +20,7 @@ class HetznerHost
       @password = result.parsed_response["rescue"]["password"]
       puts @password
       reset = hetzner.reset! @ip, 'sw'
-      while test_ssh
-        sleep 1
-      end
+      wait_for_reboot
       put_key
     else
       raise result.parsed_response["error"]["message"]

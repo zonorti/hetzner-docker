@@ -2,20 +2,6 @@
 
 Ultra simple deployment of Docker-enabled Hetzner servers  
 
-```
-Usage: hetzner-docker [command] [options]
-    -v, --version      module version
-    -m, --methods      print all methods
-    -h, --help         Display this help message.
-
-Available commands:
-
-  rescue      Enter Rescue mode
-  ubuntu      Install ubuntu on server
-  chef        Install chef
-  cook        Cook docker recipes
-  bootstrap   Do everything
-```
 
 ## Installation
 

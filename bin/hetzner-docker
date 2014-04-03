@@ -37,15 +37,15 @@ opts = Slop.parse(help: true) do
   command 'chef' do
     on :i, :ip=, 'Server ip'
     on :bootstrap_version=, 'Chef version to install', argument: :optional
-    description 'Install chef'
+    description 'Install Chef'
     run do |opts, args|
       host = HetznerHost.new(opts.to_hash)
       host.bootstrap_chef
     end
   end
 
-  command 'cook' do
-    description 'Cook docker recipes'
+  command 'docker' do
+    description 'Cook Docker recipes'
     on :i, :ip=, 'Server ip'
     on :b, :cookbook= , 'Cook this recipe only', argument: :optional
     run do |opts, args|
