@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'hetzner-docker', :path => "/home/melnik/src/docker/hetzner-docker"
+gem 'hetzner-docker', github: 'imelnik/hetzner-docker'
 gem 'hetzner-api'
 gem 'net-ssh'
 gem 'net-scp'
