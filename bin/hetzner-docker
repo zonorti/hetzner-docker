@@ -21,7 +21,7 @@ opts = Slop.parse(help: true) do
   end
 
   command 'ubuntu' do
-    description 'Install ubuntu on server'
+    description 'Install Ubuntu 14.04 on server'
     on :i, :ip=, 'Server ip'
     on :H, :hostname=, 'Desired server hostname', argument: :optional
     on :d, :domain=, 'Desired server domain', argument: :optional
