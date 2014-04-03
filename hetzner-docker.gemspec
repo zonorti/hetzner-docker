@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Configures and installs docker to Hetzner server}
   spec.description   = %q{Configures and installs docker to Hetzner server}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "GPLv2"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -19,5 +19,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "rake"
+ 
 end

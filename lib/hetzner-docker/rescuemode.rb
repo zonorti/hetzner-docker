@@ -3,7 +3,7 @@ require 'hetzner-api'
 class HetznerHost
   def rescuemode
     puts "to the rescue!"
-    hetzner = Hetzner::API.new ENV['HUSER'], ENV['HPASSWORD']
+    hetzner = Hetzner::API.new ENV['HETZNER_USER'], ENV['HETZNER_PASSWORD']
     server = hetzner.server? @ip
 
     if server.parsed_response.has_key?("server")
