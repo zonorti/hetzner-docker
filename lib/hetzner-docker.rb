@@ -21,6 +21,9 @@ class HetznerHost
     unless defined?(@domain) and @domain != nil
       @domain="twiket.com" # this is our default, sorry
     end
+    unless defined?(@url) and @url != nil
+      @url="https://raw.githubusercontent.com/iMelnik/hetzner-docker/master/do-install-trusty.sh" 
+    end
 
   end
   def user
