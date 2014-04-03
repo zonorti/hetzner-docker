@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,6 +22,7 @@ Or install it yourself as:
 export HETZNER_USER="" && export HETZNER_PASSWORD="" 
 
 hetzner-docker bootstrap -i <server-ip> -d <server-domain>
+
 ```
 
 

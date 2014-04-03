@@ -30,6 +30,8 @@ opts = Slop.parse(help: true) do
     on :i, :ip=, 'Server ip'
     on :H, :hostname=, 'Desired server hostname', argument: :optional
     on :d, :domain=, 'Desired server domain', argument: :optional
+    on :u, :url=, 'ubuntu bootstrap script', argument: :optional
+
     run do |opts, args|
       host = HetznerHost.new(opts.to_hash)
       host.rescuemode
@@ -39,7 +41,7 @@ opts = Slop.parse(help: true) do
 
   command 'chef' do
     on :i, :ip=, 'Server ip'
-    on :bootstrap_version=, 'Chef version to install'
+    on :bootstrap_version=, 'Chef version to install', argument: :optional
     description 'Install chef'
     run do |opts, args|
       host = HetznerHost.new(opts.to_hash)
