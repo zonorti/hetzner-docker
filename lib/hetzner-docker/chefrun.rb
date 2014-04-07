@@ -18,7 +18,7 @@ class HetznerHost
   def run_chef
     kb = Chef::Knife::SoloCook.new
     kb.config[:ssh_user]            = @user
-    kb.config[:override_runlist]            = "docker"
+    kb.config[:override_runlist]            = @cookbook
     kb.config[:librarian]            = false
     kb.config[:host_key_verify]            = false
     kb.name_args                    = [@ip]

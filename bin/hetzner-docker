@@ -44,10 +44,10 @@ opts = Slop.parse(help: true) do
     end
   end
 
-  command 'docker' do
-    description 'Cook Docker recipes'
+  command 'cook' do
+    description 'Cook recipes'
     on :i, :ip=, 'Server ip'
-    on :b, :cookbook= , 'Cook this recipe only', argument: :optional
+    on :b, :cookbook= , 'Cook this recipe only', argument: :optional, :default "docker"
     run do |opts, args|
       host = HetznerHost.new(opts.to_hash)
       host.run_chef
