@@ -1,0 +1,57 @@
+#cloud-config
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpIgFxCmmSHISwTmSxrYbiBIbuo0CorhnLD9jZQdlFZ6DMdBykr6jcq3mzU7gk1mPSRTqqeuIMceb1OGDE35icg+d4/3dl0Qstq3j6kNP2zg60i5+OleSFdM4TnxrXkjjgCV7QDW/TYndrJiInB0quPNwPnafgHCJWBiHdv0gSm3jEWi2jGbFAL+pIKDoKAgQcTMcUve79gniadVWLc74mf8UcysivVWEwX8UjKZynVcI0tefFYQQeAr+r020oICLdoCDsm7fjDDeosbw6WjVSQgt0p0DZD0a8FUHCjUgQKl7oXC8AcQ+4DY780gOjnnWnHXodCDcOxAj36VqE5DOB melnik@melnik-work
+users:
+  - name: melnik
+    coreos-ssh-import-github: imelnik
+    groups:
+     - sudo
+     - docker
+  - name: denz
+    coreos-ssh-import-github: dennybaa
+    groups:
+     - sudo
+     - docker
+hostname: HOSTNAME
+write_files:
+  - path: /root/prepare-drive
+    permissions: 0755
+    content: |
+      ##!/bin/bash
+      /usr/bin/test -f /var/data/active || /usr/sbin/wipefs -f /dev/sdb
+      /usr/bin/test -f /var/data/active || /usr/sbin/mkfs.btrfs -f /dev/sdb
+      /usr/bin/test -f /var/data/active || /usr/bin/mkdir -p /var/data
+      /usr/bin/touch /var/data/active
+coreos:
+  etcd:
+    name: HOSTNAME
+    discovery: https://discovery.etcd.io/4cd6529256354a0d378888045767bf3b
+    addr: EXTIP:4001 
+    peer-addr: EXTIP:7001
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: format-sdb.service
+      command: start
+      content: |
+        [Unit]
+        Description=Formats the sdb drive
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/bin/bash /root/prepare-drive 
+    - name: var-data.mount
+      command: start
+      content: |
+        [Unit]
+        Description=Mount sdb to /var/data
+        Requires=format-sdb.service
+        After=format-sdb.service
+        Before=docker.service
+        [Mount]
+        What=/dev/sdb
+        Where=/var/data
+        Type=btrfs

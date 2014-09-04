@@ -1,0 +1,15 @@
+[Unit]
+Description=Ambari Node
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/root/ambari.sh -i 192.168.90.1%i %i 192.168.90.10
+ExecStart=/usr/bin/docker attach amb%i
+ExecStop=/usr/bin/docker stop amb%i
+Type=forking
+PIDFile=/var/run/docker/amb%i.pid
+Restart=on-failure
+
+[X-Fleet]
+X-Conflicts=ambari-node@*.service

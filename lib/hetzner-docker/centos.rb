@@ -1,8 +1,8 @@
 require 'hetzner-api'
 
 class HetznerHost
-  def rescuemode
-    puts "to the rescue!"
+  def install_centos
+    puts "Installing CentOS!"
     hetzner = Hetzner::API.new ENV['HETZNER_USER'], ENV['HETZNER_PASSWORD']
     server = hetzner.server? @ip
 
@@ -14,14 +14,18 @@ class HetznerHost
     end
 
     hetzner.disable_rescue! @ip
-    result = hetzner.enable_rescue! @ip
+    result = hetzner.boot_linux!(@ip,"CentOS 7.0 minimal", "64", "en" )
 
-    if result.parsed_response.has_key?("rescue")
-      @password = result.parsed_response["rescue"]["password"]
+    if result.parsed_response.has_key?("linux")
+      @password = result.parsed_response["linux"]["password"]
       puts @password
-      hetzner.reset! @ip, 'hw'
+      hetzner.reset! @ip, 'sw'
       wait_for_reboot
       put_key
+      puts "Wait while CentOS is being installed"
+      wait_for_reboot
+      put_key
+      puts "CentOS installed" 
     else
       raise result.parsed_response["error"]["message"]
     end

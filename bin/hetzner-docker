@@ -13,8 +13,8 @@ opts = Slop.parse(help: true) do
   command 'rescue' do
     description 'Enter Rescue mode'
     on :i, :ip=, 'Server ip'
-    run do |opts, args|
-      host = HetznerHost.new(opts.to_hash)
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
       host.rescuemode
     end
 
@@ -27,19 +27,45 @@ opts = Slop.parse(help: true) do
     on :d, :domain=, 'Desired server domain', argument: :optional
     on :u, :url=, 'ubuntu bootstrap script', argument: :optional
 
-    run do |opts, args|
-      host = HetznerHost.new(opts.to_hash)
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
       host.rescuemode
       host.install_ubuntu
     end
   end
 
+  command 'centos' do
+    description 'Install CentOS 7 minimal on server'
+    on :i, :ip=, 'Server ip'
+    on :H, :hostname=, 'Desired server hostname', argument: :optional
+    on :d, :domain=, 'Desired server domain', argument: :optional
+
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
+      host.install_centos
+    end
+  end
+
+  command 'coreos' do
+    description 'Install CoreOS on server'
+    on :i, :ip=, 'Server ip'
+    on :H, :hostname=, 'Desired server hostname', argument: :optional
+    on :d, :domain=, 'Desired server domain', argument: :optional
+
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
+      host.rescuemode
+      host.install_coreos
+    end
+  end
+
+
   command 'chef' do
     on :i, :ip=, 'Server ip'
     on :bootstrap_version=, 'Chef version to install', argument: :optional
     description 'Install Chef'
-    run do |opts, args|
-      host = HetznerHost.new(opts.to_hash)
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
       host.bootstrap_chef
     end
   end
@@ -48,8 +74,8 @@ opts = Slop.parse(help: true) do
     description 'Cook recipes'
     on :i, :ip=, 'Server ip'
     on :b, :cookbook= , 'Cook this recipe only', argument: :optional, default: "docker"
-    run do |opts, args|
-      host = HetznerHost.new(opts.to_hash)
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
       host.run_chef
     end
   end

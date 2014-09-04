@@ -1,0 +1,11 @@
+[Unit]
+Description=Ambari Server
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/root/ambari.sh -i 192.168.90.10
+ExecStart=/usr/bin/docker attach --no-stdin=true amb0
+ExecStop=/usr/bin/docker stop amb0
+Type=forking
+PIDFile=/var/run/docker/amb0.pid

@@ -124,6 +124,7 @@ EOF
 # TODO
 cat >/newroot/etc/resolvconf/resolv.conf.d/original <<EOF
 search ${TARGET_DOMAIN}
+nameserver 127.0.0.1
 nameserver 213.133.100.100
 nameserver 213.133.99.99
 nameserver 213.133.98.98

@@ -1,0 +1,9 @@
+[Unit]
+Description=nsenter binary
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull jpetazzo/nsenter
+ExecStart=/usr/bin/docker run --rm -v /usr/local/sbin:/target jpetazzo/nsenter
+Type=oneshot
