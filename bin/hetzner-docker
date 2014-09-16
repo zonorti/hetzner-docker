@@ -87,8 +87,8 @@ opts = Slop.parse(help: true) do
     on :d, :domain=, 'Desired server domain', argument: :optional
     on :b, :cookbook= , 'Cook this recipe only', argument: :optional, default: "docker"
     on :bootstrap_version=, 'Chef version to install'
-    run do |opts, args|
-      host = HetznerHost.new(opts.to_hash)
+    run do |options, args|
+      host = HetznerHost.new(options.to_hash)
       host.rescuemode
       host.install_ubuntu
       host.bootstrap_chef
@@ -97,6 +97,6 @@ opts = Slop.parse(help: true) do
   end
 end
 
-if ARGV.empty?
-   puts opts.help
-end 
+#if ARGV.empty?
+#   puts opts.help
+#end
