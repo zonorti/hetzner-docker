@@ -1,6 +1,6 @@
 module HetznerDocker
-    VERSION = "0.0.1"
-    def version
-    	puts VERSION
-    end
+  VERSION = "0.0.2"
+  def version
+    puts VERSION
+  end
 end
