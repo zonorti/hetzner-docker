@@ -1,11 +1,12 @@
-require "hetzner-docker/version"
-require "hetzner-docker/rescuemode"
-require "hetzner-docker/ubuntu"
-require "hetzner-docker/centos"
-require "hetzner-docker/coreos"
-require "hetzner-docker/chefbootstrap"
-require "hetzner-docker/chefrun"
-require "hetzner-docker/tools"
+require 'hetzner-docker/version'
+require 'hetzner-docker/rescuemode'
+require 'hetzner-docker/ubuntu'
+require 'hetzner-docker/debian'
+require 'hetzner-docker/centos'
+require 'hetzner-docker/coreos'
+require 'hetzner-docker/chefbootstrap'
+require 'hetzner-docker/chefrun'
+require 'hetzner-docker/tools'
 
 class HetznerHost
   include HetznerDocker
