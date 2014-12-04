@@ -20,7 +20,7 @@ class HetznerHost
       @password = result.parsed_response["rescue"]["password"]
       puts @password
       hetzner.reset! @ip, 'hw'
-      wait_for_reboot
+      puts "waiting for rescue mode" until in_rescue_mode?
       put_key
     else
       raise result.parsed_response["error"]["message"]

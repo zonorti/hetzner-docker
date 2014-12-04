@@ -19,13 +19,13 @@ class HetznerHost
       @user='root'
     end
     unless defined?(@hostname) and @hostname != nil
-      @hostname="docker#{SecureRandom.hex(3)+@ip.rpartition(".")[2]}"
+      @hostname="hzr-#{SecureRandom.hex(3)}-#{@ip.rpartition(".")[2]}"
     end
     unless defined?(@domain) and @domain != nil
       @domain="twiket.com" # this is our default, sorry
     end
     unless defined?(@url) and @url != nil
-      @url="https://raw.githubusercontent.com/iMelnik/hetzner-docker/master/do-install-trusty.sh" 
+      @url="https://raw.githubusercontent.com/iMelnik/hetzner-docker/master/do-install-trusty.sh"
     end
 
   end

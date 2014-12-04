@@ -12,7 +12,7 @@ export TERM=xterm
 # Workarond for installimage using dialog for warnings
 # Dialog sucks at autoistalls
 rm /usr/bin/dialog
-ln -s /bin/echo /usr/bin/dialog
+ln -sf /bin/echo /usr/bin/dialog
 
 cat >/autosetup <<EOF
 
