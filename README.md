@@ -1,5 +1,7 @@
 # Hetzner::Docker
 
+[![CodeFactor](https://www.codefactor.io/repository/github/imelnik/hetzner-docker/badge)](https://www.codefactor.io/repository/github/imelnik/hetzner-docker)
+
 Ultra simple deployment of Docker-enabled Hetzner servers.
 Uses:
 hetzner-api
