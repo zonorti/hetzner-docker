@@ -25,7 +25,7 @@ class HetznerHost
       @domain="twiket.com" # this is our default, sorry
     end
     unless defined?(@url) and @url != nil
-      @url="https://raw.githubusercontent.com/iMelnik/hetzner-docker/master/do-install-trusty.sh"
+      @url="https://raw.githubusercontent.com/ZonOrti/hetzner-docker/master/do-install-trusty.sh"
     end
 
   end

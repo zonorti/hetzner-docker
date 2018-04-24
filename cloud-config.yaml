@@ -4,7 +4,7 @@ ssh_authorized_keys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpIgFxCmmSHISwTmSxrYbiBIbuo0CorhnLD9jZQdlFZ6DMdBykr6jcq3mzU7gk1mPSRTqqeuIMceb1OGDE35icg+d4/3dl0Qstq3j6kNP2zg60i5+OleSFdM4TnxrXkjjgCV7QDW/TYndrJiInB0quPNwPnafgHCJWBiHdv0gSm3jEWi2jGbFAL+pIKDoKAgQcTMcUve79gniadVWLc74mf8UcysivVWEwX8UjKZynVcI0tefFYQQeAr+r020oICLdoCDsm7fjDDeosbw6WjVSQgt0p0DZD0a8FUHCjUgQKl7oXC8AcQ+4DY780gOjnnWnHXodCDcOxAj36VqE5DOB melnik@melnik-work
 users:
   - name: melnik
-    coreos-ssh-import-github: imelnik
+    coreos-ssh-import-github: zonorti
     groups:
      - sudo
      - docker

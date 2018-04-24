@@ -1,6 +1,6 @@
 # Hetzner::Docker
 
-[![CodeFactor](https://www.codefactor.io/repository/github/imelnik/hetzner-docker/badge)](https://www.codefactor.io/repository/github/imelnik/hetzner-docker)
+[![CodeFactor](https://www.codefactor.io/repository/github/ZonOrti/hetzner-docker/badge)](https://www.codefactor.io/repository/github/ZonOrti/hetzner-docker)
 
 Ultra simple deployment of Docker-enabled Hetzner servers.
 Uses:
@@ -44,7 +44,7 @@ hetzner-docker bootstrap -i <server-ip> -d <server-domain>
 
 ## Contributing
 
-1. Fork it ( http://github.com/imelnik/hetzner-docker/fork )
+1. Fork it ( http://github.com/ZonOrti/hetzner-docker/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

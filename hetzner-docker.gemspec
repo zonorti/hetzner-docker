@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Configures and installs docker to Hetzner server in\
                         default bootstrap mode, yet has some server management\
                         modes like rescue mode, CentOS and CoreOS installation'
-  spec.homepage      = 'https://github.com/iMelnik/hetzner-docker'
+  spec.homepage      = 'https://github.com/ZonOrti/hetzner-docker'
   spec.license       = 'GPLv2'
 
   spec.files         = `git ls-files -z`.split("\x0")
